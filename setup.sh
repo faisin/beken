@@ -18,26 +18,8 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-# Link Hosting Kalian Untuk Ssh Vpn
-akbarvpn="raw.githubusercontent.com/givpn/autoscriptvps/master/ssh"
-# Link Hosting Kalian Untuk Sstp
-akbarvpnn="raw.githubusercontent.com/givpn/autoscriptvps/master/sstp"
-# Link Hosting Kalian Untuk Ssr
-akbarvpnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/ssr"
-# Link Hosting Kalian Untuk Shadowsocks
-akbarvpnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/shadowsocks"
-# Link Hosting Kalian Untuk Wireguard
-akbarvpnnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/wireguard"
-# Link Hosting Kalian Untuk Xray
-akbarvpnnnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/xray"
-# Link Hosting Kalian Untuk Ipsec
-akbarvpnnnnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/ipsec"
-# Link Hosting Kalian Untuk Backup
-akbarvpnnnnnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/backup"
-# Link Hosting Kalian Untuk Websocket
-akbarvpnnnnnnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/websocket"
-# Link Hosting Kalian Untuk Ohp
-akbarvpnnnnnnnnnn="raw.githubusercontent.com/givpn/autoscriptvps/master/ohp"
+# Link Repository Faisin / Beken
+faisinrepo="raw.githubusercontent.com/faisin/beken/main"
 
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
@@ -51,24 +33,24 @@ exit 0
 fi
 mkdir /var/lib/akbarstorevpn;
 echo "IP=" >> /var/lib/akbarstorevpn/ipvps.conf
-wget https://${akbarvpn}/cf.sh && chmod +x cf.sh && ./cf.sh
+wget https://${faisinrepo}/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
 #install v2ray
-wget https://${akbarvpnnnnnn}/ins-xray.sh && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
+wget https://${faisinrepo}/xray/ins-xray.sh && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
 #install ssh ovpn
-wget https://${akbarvpn}/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
-wget https://${akbarvpnn}/sstp.sh && chmod +x sstp.sh && screen -S sstp ./sstp.sh
+wget https://${faisinrepo}/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
+wget https://${faisinrepo}/sstp/sstp.sh && chmod +x sstp.sh && screen -S sstp ./sstp.sh
 #install ssr
-wget https://${akbarvpnnn}/ssr.sh && chmod +x ssr.sh && screen -S ssr ./ssr.sh
-wget https://${akbarvpnnnn}/sodosok.sh && chmod +x sodosok.sh && screen -S ss ./sodosok.sh
+wget https://${faisinrepo}/ssr/ssr.sh && chmod +x ssr.sh && screen -S ssr ./ssr.sh
+wget https://${faisinrepo}/shadowsocks/sodosok.sh && chmod +x sodosok.sh && screen -S ss ./sodosok.sh
 #installwg
-wget https://${akbarvpnnnnn}/wg.sh && chmod +x wg.sh && screen -S wg ./wg.sh
+wget https://${faisinrepo}/wireguard/wg.sh && chmod +x wg.sh && screen -S wg ./wg.sh
 #install L2TP
-wget https://${akbarvpnnnnnnn}/ipsec.sh && chmod +x ipsec.sh && screen -S ipsec ./ipsec.sh
-wget https://${akbarvpnnnnnnnn}/set-br.sh && chmod +x set-br.sh && ./set-br.sh
+wget https://${faisinrepo}/ipsec/ipsec.sh && chmod +x ipsec.sh && screen -S ipsec ./ipsec.sh
+wget https://${faisinrepo}/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 # Websocket
-wget https://${akbarvpnnnnnnnnn}/edu.sh && chmod +x edu.sh && ./edu.sh
+wget https://${faisinrepo}/websocket/edu.sh && chmod +x edu.sh && ./edu.sh
 # Ohp Server
-wget https://${akbarvpnnnnnnnnnn}/ohp.sh && chmod +x ohp.sh && ./ohp.sh
+wget https://${faisinrepo}/ohp/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 
 rm -f /root/ssh-vpn.sh
 rm -f /root/sstp.sh
@@ -83,7 +65,7 @@ rm -f /root/ohp.sh
 cat <<EOF> /etc/systemd/system/autosett.service
 [Unit]
 Description=autosetting
-Documentation=https://t.me/Akbar218
+Documentation=VPN AYAH ALMA
 
 [Service]
 Type=oneshot
@@ -95,7 +77,7 @@ WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 systemctl enable autosett
-wget -O /etc/set.sh "https://${akbarvpn}/set.sh"
+wget -O /etc/set.sh "https://${faisinrepo}/ssh/set.sh"
 chmod +x /etc/set.sh
 history -c
 echo "1.2" > /home/ver
