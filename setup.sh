@@ -49,8 +49,6 @@ wget https://${faisinrepo}/ipsec/ipsec.sh && chmod +x ipsec.sh && screen -S ipse
 wget https://${faisinrepo}/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
 # Websocket
 wget https://${faisinrepo}/websocket/edu.sh && chmod +x edu.sh && ./edu.sh
-# Ohp Server
-wget https://${faisinrepo}/ohp/ohp.sh && chmod +x ohp.sh && ./ohp.sh
 
 rm -f /root/ssh-vpn.sh
 rm -f /root/sstp.sh
