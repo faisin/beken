@@ -1,4 +1,6 @@
 #!/bin/bash
+apt-get update -y
+apt-get install -y unzip lsof sudo curl wget ca-certificates
 
 # Color
 RED='\033[0;31m'
@@ -48,15 +50,14 @@ mkdir -p /var/log/xray/
 
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 cd /root/
-wget https://raw.githubusercontent.com/acmesh-official/acme.sh/master/acme.sh
+wget https://raw.githubusercontent.com/acmesh-official/acme.sh/main/acme.sh
 bash acme.sh --install
 rm acme.sh
 cd .acme.sh
 bash acme.sh --register-account -m senowahyu62@gmail.com
 bash acme.sh --issue --standalone -d $domain --force
 bash acme.sh --installcert -d $domain --fullchainpath /etc/xray/xray.crt --keypath /etc/xray/xray.key
-
-service squid start
+if command -v service >/dev/null 2>&1 && command -v squid >/dev/null 2>&1; then service squid start; fi
 uuid1=$(cat /proc/sys/kernel/random/uuid)
 uuid2=$(cat /proc/sys/kernel/random/uuid)
 uuid3=$(cat /proc/sys/kernel/random/uuid)
