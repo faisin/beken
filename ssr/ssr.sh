@@ -102,7 +102,7 @@ Debian_apt(){
 }
 Download_SSR(){
 	cd "/usr/local"
-	git clone -b akkariiin/master https://github.com/shadowsocksrr/shadowsocksr.git
+	git clone -b akkariiin/main https://github.com/shadowsocksrr/shadowsocksr.git
 	cd "shadowsocksr"
 	cp "${ssr_folder}/config.json" "${config_user_file}"
 	cp "${ssr_folder}/mysql.json" "${ssr_folder}/usermysql.json"
@@ -114,12 +114,12 @@ Download_SSR(){
 }
 Service_SSR(){
 if [[ ${OS} = "centos" ]]; then
-wget --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/master/ssrmu_centos -O /etc/init.d/ssrmu
+wget --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/main/ssrmu_centos -O /etc/init.d/ssrmu
 chmod +x /etc/init.d/ssrmu
 chkconfig --add ssrmu
 chkconfig ssrmu on
 else
-wget --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/master/ssrmu_debian -O /etc/init.d/ssrmu
+wget --no-check-certificate https://raw.githubusercontent.com/hybtoy/ssrrmu/main/ssrmu_debian -O /etc/init.d/ssrmu
 chmod +x /etc/init.d/ssrmu
 update-rc.d -f ssrmu defaults
 fi
