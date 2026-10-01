@@ -37,7 +37,7 @@
 # V1.9      20 Feb 2008     Fix invalid values reported when PSS is available.
 #                           Reported by Andrey Borzenkov <arvidjaar@mail.ru>
 # V3.8      17 Jun 2016
-#   http://github.com/pixelb/scripts/commits/master/scripts/ps_mem.py
+#   http://github.com/pixelb/scripts/commits/main/scripts/ps_mem.py
 
 # Notes:
 #

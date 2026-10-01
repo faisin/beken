@@ -247,7 +247,7 @@ cd /root
 rm -r -f stunnel
 rm -f stunnel5.zip
 mkdir -p /etc/stunnel5
-chmod 644 /etc/stunnel5
+chmod 755 /etc/stunnel5
 
 # Download Config Stunnel5
 cat > /etc/stunnel5/stunnel5.conf <<-END
