@@ -1,4 +1,6 @@
 #!/bin/bash
+
+exiterr() { echo "ERROR: $*" >&2; exit 1; }
 # Debian 11 & 12 64bit
 # Ubuntu 22.04 & 24.04 bit
 # Ayah Alma Editions
