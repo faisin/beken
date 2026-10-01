@@ -1,4 +1,4 @@
-# by givpn
+# by 
 # ipinfo
 MYIP=$(wget -qO- ipinfo.io/ip);
 # pewarna hidup
@@ -8,7 +8,7 @@ BYellow='\e[1;33m'
 BBlue='\e[1;34m'
 BPurple='\e[1;35m'
 NC='\e[0m'
-wget -qO- -O /etc/ssh/sshd_config https://raw.githubusercontent.com/givpn/autoscriptvps/master/sshd_config;
+wget -qO- -O /etc/ssh/sshd_config https://raw.githubusercontent.com/faisin/beken/main/sshd_config;
 systemctl restart ssh 2>/dev/null || systemctl restart sshd;
 clear;
 read -p "Enter Password : " pass

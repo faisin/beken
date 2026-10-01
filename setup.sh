@@ -1,82 +1,26 @@
-#!/bin/bash
-if [ "${EUID}" -ne 0 ]; then
-		echo "You need to run this script as root"
-		exit 1
-fi
-if [ "$(systemd-detect-virt)" == "openvz" ]; then
-		echo "OpenVZ is not supported"
-		exit 1
-fi
-# ==========================================
-# Color
-RED='\033[0;31m'
-NC='\033[0m'
-GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-LIGHT='\033[0;37m'
-# ==========================================
-# Link Repository Faisin / Beken
-faisinrepo="raw.githubusercontent.com/faisin/beken/main"
 
-# Getting
-MYIP=$(wget -qO- ipinfo.io/ip);
-echo "Checking VPS"
-clear
-rm -f setup.sh
-clear
-if [ -f "/etc/xray/domain" ]; then
-echo "Script Already Installed"
-exit 0
-fi
-mkdir /var/lib/akbarstorevpn;
-echo "IP=" >> /var/lib/akbarstorevpn/ipvps.conf
-wget https://${faisinrepo}/ssh/cf.sh && chmod +x cf.sh && ./cf.sh
-#install v2ray
-wget https://${faisinrepo}/xray/ins-xray.sh && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
-#install ssh ovpn
-wget https://${faisinrepo}/ssh/ssh-vpn.sh && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
-wget https://${faisinrepo}/sstp/sstp.sh && chmod +x sstp.sh && screen -S sstp ./sstp.sh
-#install ssr
-wget https://${faisinrepo}/ssr/ssr.sh && chmod +x ssr.sh && screen -S ssr ./ssr.sh
-wget https://${faisinrepo}/shadowsocks/sodosok.sh && chmod +x sodosok.sh && screen -S ss ./sodosok.sh
-#installwg
-wget https://${faisinrepo}/wireguard/wg.sh && chmod +x wg.sh && screen -S wg ./wg.sh
-#install L2TP
-wget https://${faisinrepo}/ipsec/ipsec.sh && chmod +x ipsec.sh && screen -S ipsec ./ipsec.sh
-wget https://${faisinrepo}/backup/set-br.sh && chmod +x set-br.sh && ./set-br.sh
-# Websocket
-wget https://${faisinrepo}/websocket/edu.sh && chmod +x edu.sh && ./edu.sh
+# Base dependencies required by installer modules.
+export DEBIAN_FRONTEND=noninteractive
+BEKEN_WORKDIR="/root/beken-install"
+mkdir -p "$BEKEN_WORKDIR"
+cd "$BEKEN_WORKDIR"
 
-rm -f /root/ssh-vpn.sh
-rm -f /root/sstp.sh
-rm -f /root/wg.sh
-rm -f /root/ss.sh
-rm -f /root/ssr.sh
-rm -f /root/ins-xray.sh
-rm -f /root/ipsec.sh
-rm -f /root/set-br.sh
-rm -f /root/edu.sh
-cat <<EOF> /etc/systemd/system/autosett.service
-[Unit]
-Description=autosetting
-Documentation=VPN AYAH ALMA
+# Python3 runtime dependencies for Debian 11/12/13 and Ubuntu modern
+install_python3_runtime() {
+    echo "Installing Python3 runtime dependencies..."
+    apt-get update -y
+    apt-get install -y python3 python3-pip python3-venv python3-setuptools || true
 
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /etc/set.sh
-RemainAfterExit=yes
+    if command -v pip3 >/dev/null 2>&1; then
+        pip3 install --disable-pip-version-check --upgrade speedtest-cli websocket-client requests || true
+    fi
+}
 
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl enable autosett
-wget -O /etc/set.sh "https://${faisinrepo}/ssh/set.sh"
-chmod +x /etc/set.sh
-history -c
+install_python3_runtime
+
+apt-get update -y
+apt-get install -y wget curl screen unzip lsof sudo ca-certificates
+
 echo "1.2" > /home/ver
 echo " "
 echo "Installation has been completed!!"
